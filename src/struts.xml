@@ -1,17 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <struts>
 
+	<!-- 
+	* @author klogle
+	 *E-mail:klogle.one@qq.com 
+	 -->
+	 
 	<interceptor class="com.klogle.interceptor.ParamInterceptor" />
 
 	<constant name="struts.action.extension" value="action"></constant>
 
-	<action name="helloAction" class="com.klogle.action.HelloAction" method="hello">
+	<action name="helloAction" class="com.klogle.action.HelloAction"
+		method="hello">
 		<result name="success">/index.jsp</result>
 		<result name="login">/login.jsp</result>
-		<param name="count">1234</param>
+		<param name="count">324.5</param>
 	</action>
 	<!-- 默认跳转到execute（空方法）默认结果视图是success -->
-	<action name="login" class="com.klogle.action.LoginAction"	>
+	<action name="login" class="com.klogle.action.LoginAction">
 		<result>/index.jsp</result>
 	</action>
 </struts>

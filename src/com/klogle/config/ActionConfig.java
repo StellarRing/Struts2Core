@@ -3,13 +3,24 @@ package com.klogle.config;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * 用于承载Action配置信息的Bean
+ * @author klogle
+ *package:com.klogle.config
+ *E-mail:klogle.one@qq.com
+ */
 public class ActionConfig {
 
+	//action name
 	private String name;
+	//action method
 	private String method;
+	//action className
 	private String className;
 
+	//action results
 	private Map<String, Result> results = new HashMap<>();
+	//静态注入参数
 	private Map<String, StaticParam> staticParams = new HashMap<>();
 
 	public String getName() {

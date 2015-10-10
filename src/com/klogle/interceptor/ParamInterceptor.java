@@ -8,6 +8,12 @@ import com.klogle.context.ActionContext;
 import com.klogle.context.ValueStack;
 import com.klogle.invocation.ActionInvocation;
 
+/**
+ * 参数拦截器
+ * @author klogle
+ *package:com.klogle.interceptor
+ *E-mail:klogle.one@qq.com
+ */
 public class ParamInterceptor implements Interceptor {
 
 	@Override
@@ -28,7 +34,6 @@ public class ParamInterceptor implements Interceptor {
 		} catch (InvocationTargetException e) {
 			e.printStackTrace();
 		}
-
 		return invocation.invoke(invocation);
 	}
 

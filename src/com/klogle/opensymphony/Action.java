@@ -1,5 +1,11 @@
 package com.klogle.opensymphony;
 
+/**
+ * 值栈存放值的KEY常量
+ * @author klogle
+ *package:com.klogle.opensymphony
+ *E-mail:klogle.one@qq.com
+ */
 public interface Action {
 
     /**

@@ -13,6 +13,12 @@ import com.klogle.config.ActionConfig;
 import com.klogle.context.ActionContext;
 import com.klogle.interceptor.Interceptor;
 
+/**
+ * 调度中心
+ * @author klogle
+ *package:com.klogle.invocation
+ *E-mail:klogle.one@qq.com
+ */
 public class ActionInvocation {
 
 	// 准备invocation链
@@ -27,6 +33,7 @@ public class ActionInvocation {
 	public ActionInvocation(List<String> interceptorClassNames, ActionConfig config, HttpServletRequest request,
 			HttpServletResponse response) {
 		List<Interceptor> interceptorList = null;
+		//准备invocation链
 		if (interceptorClassNames != null && interceptorClassNames.size() > 0) {
 			interceptorList = new ArrayList<>();
 			for (String className : interceptorClassNames) {
@@ -45,6 +52,7 @@ public class ActionInvocation {
 					e.printStackTrace();
 					throw new RuntimeException("未找到对应类：" + className);
 				}
+				//拦截器入链
 				interceptorList.add(interceptor);
 			}
 			this.interceptors = interceptorList.iterator();
@@ -68,12 +76,21 @@ public class ActionInvocation {
 		context = new ActionContext(request, response, action);
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public ActionContext getContext() {
 		return context;
 	}
 
-	private String result;
 
+	/**
+	 * 函数调用
+	 * @param invocation	invocation对象（采用递归执行）
+	 * @return 函数调用返回值
+	 */
+	private String result;
 	public String invoke(ActionInvocation invocation) {
 
 		// 执行拦截器链，结果视图是否被赋值

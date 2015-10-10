@@ -3,6 +3,12 @@ package com.klogle.context;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 值栈
+ * @author klogle
+ *package:com.klogle.context
+ *E-mail:klogle.one@qq.com
+ */
 public class ValueStack {
 
 	private List<Object> valueStack = null;

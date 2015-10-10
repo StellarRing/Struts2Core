@@ -1,7 +1,12 @@
 package com.klogle.action;
 
 import com.klogle.opensymphony.ActionSupport;
-
+/**
+ * 
+ * @author klogle
+ *package:com.klogle.action
+ *E-mail:klogle.one@qq.com
+ */
 public class HelloAction extends ActionSupport {
 	private String name;
 

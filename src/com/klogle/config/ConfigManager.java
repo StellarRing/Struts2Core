@@ -11,6 +11,12 @@ import org.dom4j.DocumentException;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 
+/**
+ *  配置文件解析器
+ * @author klogle
+ *package:com.klogle.config
+ *E-mail:klogle.one@qq.com
+ */
 public class ConfigManager {
 
 	List<String> interceptors;
@@ -49,7 +55,11 @@ public class ConfigManager {
 		return interceptors;
 	}
 
-	// 2、读取constant
+	/**
+	 * 获取struts常量配置参数
+	 * 
+	 * @return 参数集合
+	 */
 	public Map<String, String> getConstant() {
 		Map<String, String> map = new HashMap<>();
 		String Xpath = "//constant";
@@ -64,7 +74,11 @@ public class ConfigManager {
 		return map;
 	}
 
-	// 3、读取action
+	/**
+	 * 获取Bean配置参数
+	 * 
+	 * @return Bean配置信息集合
+	 */
 	public Map<String, ActionConfig> getActionConfig() {
 		Map<String, ActionConfig> actionMap = new HashMap<>();
 		ActionConfig config;
@@ -76,7 +90,7 @@ public class ConfigManager {
 				String name = ele.attributeValue("name");
 				String className = ele.attributeValue("class");
 				String method = ele.attributeValue("method");
-				// 考虑到method的默认值是execute
+				// action的method默认值是execute
 				method = method == null || method.equals("") ? "execute" : method;
 				config.setClassName(className);
 				config.setMethod(method);
@@ -86,6 +100,7 @@ public class ConfigManager {
 					Result result;
 					for (Element element : resultList) {
 						result = new Result();
+						// action的result默认视图是success
 						String resultName = element.attributeValue("name");
 						resultName = resultName == null ? "success" : resultName;
 						String type = element.attributeValue("type");
@@ -96,17 +111,20 @@ public class ConfigManager {
 						config.getResults().put(resultName, result);
 					}
 				}
+				/**
+				 * 静态属性注入
+				 */
 				Xpath = "//param";
 				List<Element> paramList = doc.selectNodes(Xpath);
 				if (paramList != null && paramList.size() > 0) {
 					StaticParam staticParam;
 					for (Element element : paramList) {
-						staticParam=new StaticParam();
-							String paramName=element.attributeValue("name");
-							String paramValue=element.getText();
-							staticParam.setName(paramName);
-							staticParam.setValue(paramValue);
-							config.getStaticParams().put(paramName, staticParam);
+						staticParam = new StaticParam();
+						String paramName = element.attributeValue("name");
+						String paramValue = element.getText();
+						staticParam.setName(paramName);
+						staticParam.setValue(paramValue);
+						config.getStaticParams().put(paramName, staticParam);
 					}
 				}
 				actionMap.put(name, config);

@@ -1,5 +1,11 @@
 package com.klogle.config;
 
+/**
+ *承载result视图对应的各项配置信息
+ * @author klogle
+ *package:com.klogle.config
+ *E-mail:klogle.one@qq.com
+ */
 public class Result {
 
 	private String name;

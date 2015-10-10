@@ -18,23 +18,28 @@ import com.klogle.config.ConfigManager;
 import com.klogle.context.ActionContext;
 import com.klogle.invocation.ActionInvocation;
 
+/**
+ * 核心过滤器
+ * @author klogle
+ *package:com.klogle.filter
+ *E-mail:klogle.one@qq.com
+ */
 public class PrepareAndExcuteFilter implements Filter {
-	/**
-	 * 1、准备过滤器链 2、准备constant获取到extension 3、加载action配置
-	 */
-	// 配置信息中心
+	
+	// 配置信息加载器
 	private ConfigManager config;
-	// 配置文件中的拦截器
+	// 载入拦截器配置信息
 	private List<String> interceptors;
-	// 配置文件中后缀拦截器的拦截后缀
+	// 动作类访问后缀
 	private String extension;
-	// 配置文件中的action配置信息
+	// 动作类配置信息
 	private Map<String, ActionConfig> actionConfigs;
 
 	@Override
+	//初始化过滤器
 	public void init(FilterConfig arg0) throws ServletException {
 		config = new ConfigManager("/struts.xml");
-		// 过滤器链
+		// 准备过滤器链
 		interceptors = config.getInterceptors();
 		// 准备constant对象，并获取到extension
 		extension = config.getConstant().get("struts.action.extension");
@@ -43,6 +48,7 @@ public class PrepareAndExcuteFilter implements Filter {
 	}
 
 	@Override
+	//执行访问拦截
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
 		HttpServletRequest req = (HttpServletRequest) request;
@@ -53,15 +59,18 @@ public class PrepareAndExcuteFilter implements Filter {
 			chain.doFilter(request, response);
 			return;
 		} else {
+			//如果是以指定后缀结尾，读取后缀信息
 			requestPath = requestPath.substring(1);
 			requestPath = requestPath.replaceAll("." + extension, "");
 			ActionConfig actionConfig = actionConfigs.get(requestPath);
+			//判断是否存在请求的action对象
 			if (actionConfig == null) {
 				throw new RuntimeException("访问的action不存在！" + requestPath);
 			}
 			ActionInvocation invocation = new ActionInvocation(interceptors, actionConfig, req, resp);
 			String result = invocation.invoke(invocation);
 			String dispatherPath = actionConfig.getResults().get(result).getTemplate();
+			//判断是否已定义访问视图（主要供开发者使用）
 			if (dispatherPath.equals("") || dispatherPath == null) {
 				throw new RuntimeException("访问的视图不存在!" + dispatherPath);
 			}

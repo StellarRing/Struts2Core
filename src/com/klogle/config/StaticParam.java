@@ -1,5 +1,11 @@
 package com.klogle.config;
 
+/**
+ * 承载静态参数各项配置信息
+ * @author klogle
+ *package:com.klogle.config
+ *E-mail:klogle.one@qq.com
+ */
 public class StaticParam {
 
 	private String name;

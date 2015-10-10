@@ -4,9 +4,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>struts test</title>
 </head>
 <body>
-			<h1>请登录！</h1>
+			<h1>Please login!</h1>
 </body>
 </html>
