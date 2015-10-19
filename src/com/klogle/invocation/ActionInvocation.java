@@ -28,7 +28,7 @@ public class ActionInvocation {
 	// action配置信息
 	private ActionConfig config;
 	// 数据中心
-	private ActionContext context;
+	private ActionContext actionContext;
 
 	public ActionInvocation(List<String> interceptorClassNames, ActionConfig config, HttpServletRequest request,
 			HttpServletResponse response) {
@@ -73,17 +73,16 @@ public class ActionInvocation {
 			throw new RuntimeException("未找到对应类：" + actionClassName);
 		}
 		// 准备数据中心ActionContext
-		context = new ActionContext(request, response, action);
+		actionContext = new ActionContext(request, response, action);
 	}
 
 	/**
 	 * 
-	 * @return
+	 * @return Struts数据中心
 	 */
 	public ActionContext getContext() {
-		return context;
+		return actionContext;
 	}
-
 
 	/**
 	 * 函数调用
@@ -120,5 +119,9 @@ public class ActionInvocation {
 			}
 		}
 		return result;
+	}
+
+	public ActionConfig getConfig() {
+		return config;
 	}
 }

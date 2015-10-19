@@ -18,7 +18,6 @@ public class ParamInterceptor implements Interceptor {
 
 	@Override
 	public void init() {
-
 	}
 
 	@Override
@@ -28,11 +27,15 @@ public class ParamInterceptor implements Interceptor {
 		// 从栈顶获取action
 		Object action = vs.seek();
 		try {
+			/**
+			 * 通过ActionContext提供的request接口获取到当前访问的HttpRequest对象
+			 * 从栈顶可以获取到action对象
+			 */
 			BeanUtils.populate(action, ac.getRequest().getParameterMap());
 		} catch (IllegalAccessException e) {
-			e.printStackTrace();
+			throw new RuntimeException("非法访问！"+e.getMessage());
 		} catch (InvocationTargetException e) {
-			e.printStackTrace();
+			throw new RuntimeException("目标调用失败！"+e.getMessage());
 		}
 		return invocation.invoke(invocation);
 	}
@@ -41,5 +44,4 @@ public class ParamInterceptor implements Interceptor {
 	public void destory() {
 
 	}
-
 }

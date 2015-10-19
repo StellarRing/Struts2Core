@@ -57,7 +57,6 @@ public class ConfigManager {
 
 	/**
 	 * 获取struts常量配置参数
-	 * 
 	 * @return 参数集合
 	 */
 	public Map<String, String> getConstant() {
@@ -111,9 +110,7 @@ public class ConfigManager {
 						config.getResults().put(resultName, result);
 					}
 				}
-				/**
-				 * 静态属性注入
-				 */
+				//静态属性注入
 				Xpath = "//param";
 				List<Element> paramList = doc.selectNodes(Xpath);
 				if (paramList != null && paramList.size() > 0) {

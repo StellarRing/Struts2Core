@@ -59,14 +59,16 @@ public class PrepareAndExcuteFilter implements Filter {
 			chain.doFilter(request, response);
 			return;
 		} else {
-			//如果是以指定后缀结尾，读取后缀信息
+			//如果是以指定后缀结尾，读取action访问路径
 			requestPath = requestPath.substring(1);
 			requestPath = requestPath.replaceAll("." + extension, "");
+			//获取到配置对象
 			ActionConfig actionConfig = actionConfigs.get(requestPath);
 			//判断是否存在请求的action对象
 			if (actionConfig == null) {
 				throw new RuntimeException("访问的action不存在！" + requestPath);
 			}
+			//准备调度中心
 			ActionInvocation invocation = new ActionInvocation(interceptors, actionConfig, req, resp);
 			String result = invocation.invoke(invocation);
 			String dispatherPath = actionConfig.getResults().get(result).getTemplate();

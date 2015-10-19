@@ -13,6 +13,8 @@ public class HelloAction extends ActionSupport {
 	private String sex;
 
 	private Integer age;
+	
+	private String address;
 
 	public String hello() {
 		if (age < 20) {
@@ -46,4 +48,13 @@ public class HelloAction extends ActionSupport {
 	public void setAge(Integer age) {
 		this.age = age;
 	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	
 }

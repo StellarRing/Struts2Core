@@ -3,15 +3,14 @@
 
 	<!-- 
 	* @author klogle
-	 *E-mail:klogle.one@qq.com 
+	 *E-mail:klogle.one@qq.com
 	 -->
 	 
 	<interceptor class="com.klogle.interceptor.ParamInterceptor" />
 
 	<constant name="struts.action.extension" value="action"></constant>
 
-	<action name="helloAction" class="com.klogle.action.HelloAction"
-		method="hello">
+	<action name="helloAction" class="com.klogle.action.HelloAction" method="hello">
 		<result name="success">/index.jsp</result>
 		<result name="login">/login.jsp</result>
 		<param name="count">324.5</param>
